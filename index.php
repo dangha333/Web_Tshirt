@@ -60,6 +60,7 @@ match ($act) {
   'tim-kiem-san-pham'       => (new SanPhamController())->search(),
   'banner'                     => (new BannerController())->banner(),
   'tin-tuc'                   => (new TinTucController())->tintuc(),
+  'alltin-tuc'                   => (new TinTucController())->home(),
 
   // Danh sách sản phẩm
 

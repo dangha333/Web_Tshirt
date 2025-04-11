@@ -52,6 +52,12 @@
                                                 </li>
                                             </ul>
                                         </li>
+
+                                        <li class="level-0 menu-item">
+                                            <a href=""><span class="menu-item-text">Tin tức</span></a>
+                                       
+                                        </li>
+
                                         <li class="level-0 menu-item">
 
 
