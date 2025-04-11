@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Thanh Toán</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="checkout-form">
+            <h1>THANH TOÁN</h1>
+            <p>(1 sản phẩm) 2.160.000₫</p>
+            <form>
+                <!-- Liên hệ -->
+                <div class="section">
+                    <h2>LIÊN HỆ</h2>
+                    <input type="email" placeholder="Địa chỉ email" required>
+                </div>
+            
+                <!-- Địa chỉ -->
+                <div class="section">
+                    <h2>ĐỊA CHỈ</h2>
+                    <input type="text" placeholder="Họ và tên *" required>
+                    <input type="text" placeholder="Số nhà/Tên đường *" required>
+                    
+                    <div class="row">
+                        <input type="text" placeholder="Thành phố" required>
+                        <input type="text" placeholder="Quận/Huyện" required>
+                    </div>
+                    <input type="text" placeholder="Số điện thoại *" required>
+                </div>
+            
+                <!-- Ghi chú -->
+                <div class="section">
+                    <h2>GHI CHÚ</h2>
+                    <textarea placeholder="Nhập ghi chú (nếu có)" rows="4"></textarea>
+                </div>
+            
+                <!-- Hóa đơn -->
+                <div class="section">
+                    <select required>
+                        <option value="" disabled selected>Phương thức thanh toán</option>
+                        <option value="personal">Thanh toán khi nhận hàng</option>
+     
+                    </select>
+                </div>
+            
+                <button type="submit" class="btn-submit">Đặt hàng</button>
+            </form>
+            
+            </div>
+    
+            <!-- Đơn hàng -->
+            <div class="order-summary">
+                <h2>ĐƠN HÀNG CỦA BẠN</h2>
+                <div class="order-item">
+                    <p>Giày Samba OG</p>
+                    <p>2.160.000₫</p>
+                </div>
+                <div class="price-details">
+                    <p>Giá gốc: 2.700.000₫</p>
+                    <p>Giao hàng: Miễn phí</p>
+                    <p>On Sale: -540.000₫</p>
+                    <hr>
+                    <p><strong>Tổng: 2.160.000₫</strong></p>
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.checkout-form, .order-summary {
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.checkout-form {
+    flex: 3;
+    margin-right: 20px;
+}
+
+.order-summary {
+    flex: 1;
+}
+
+h1, h2 {
+    margin-bottom: 15px;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+input[type="text"], input[type="email"], select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+}
+
+.row select, .row input[type="text"] {
+    flex: 1;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background: #000;
+    color: #fff;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background: #333;
+}
+
+.order-item, .price-details {
+    margin-bottom: 15px;
+}
+
+.price-details p {
+    margin-bottom: 5px;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 10px 0;
+}
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    resize: none; /* Ngăn kéo dãn kích thước */
+    margin-bottom: 10px;
+}
+
+
+</style>    
