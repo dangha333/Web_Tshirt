@@ -93,7 +93,12 @@
                                                             <tr>
                                                                 <td class="fw-medium"><?= $index + 1 ?></td>
                                                                 <td><?= $banner['title'] ?></td>
-                                                                <td><img src="<?= $banner['hinh_anh'] ?>" width="70" alt="70"></td>
+                                                                
+                                                                <td>
+                                                                <img width="200" height="100"
+                                                                                    src="<?= 'http://localhost/web_Tshirt/' . $banner['hinh_anh'] ?>"
+                                                                                    class="hover-image back" alt="">
+                                                                </td>
                                                                 <td><?= $banner['lien_ket'] ?></td>
                                                                 <td>
                                                                     <?php

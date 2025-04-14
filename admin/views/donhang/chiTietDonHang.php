@@ -121,7 +121,7 @@
         <h5 class="h3" style="padding-bottom: 10px;"><u>Thông tin người đặt</u></h5>
         <?php if ($user): ?>
             <p>Họ tên: <?= htmlspecialchars($user['ho_ten']) ?></p>
-            <p>Email: <?= htmlspecialchars($user['email']) ?></p>
+            <p>Email: <?= htmlspecialchars($user['email'] ?? '')?></p>
             <p>SĐT: <?= htmlspecialchars($user['so_dien_thoai']) ?></p>
         <?php else: ?>
             <p>Không tìm thấy thông tin người đặt.</p>
@@ -132,7 +132,7 @@
     <div class="col-md-4">
         <h5 class="h3" style="padding-bottom: 10px;"><u>Thông tin người nhận</u></h5>
         <p>Họ tên: <?= htmlspecialchars($donhang['ho_ten_nguoi_nhan']) ?></p>
-        <p>Email: <?= htmlspecialchars($donhang['email_nguoi_nhan']) ?></p>
+        <p>Email: <?= htmlspecialchars($donhang['email_nguoi_nhan'] ?? '') ?></p>
         <p>SĐT: <?= htmlspecialchars($donhang['sdt_nguoi_nhan']) ?></p>
         <p>Địa chỉ: <?= htmlspecialchars($donhang['dia_chi_nguoi_nhan']) ?></p>
     </div>
