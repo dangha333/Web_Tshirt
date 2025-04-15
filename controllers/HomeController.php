@@ -62,7 +62,8 @@ class HomeController
         }
 
         $san_pham_id = $_POST['san_pham_id'];
-        $so_luong = $_POST['so_luong'];
+       
+        $so_luong = (int) $_POST['so_luong']; 
 
         // Kiểm tra số lượng tồn kho
         $so_luong_ton = $this->modelGioHang->getSoLuongSanPham($san_pham_id);
@@ -138,32 +139,41 @@ class HomeController
 
   public function capNhatGioHang()
   {
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-      if (isset($_SESSION['user'])) {
-        $email = $this->modelTaiKhoan->getAllTaiKhoanformEmail($_SESSION['user']['email']);
-        $gioHang = $this->modelGioHang->getGioHangFromUser($email['id']);
-        $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
-
-        if (isset($_POST['so_luong'])) {
-          foreach ($_POST['so_luong'] as $sanPhamId => $soLuongMoi) {
-            // Kiểm tra số lượng còn lại trong kho
-            $soLuongConLai = $this->modelSanPham->getAllSanPham($sanPhamId);
-
-            // Kiểm tra xem số lượng mới có vượt quá tồn kho không
-            if ($soLuongMoi > $soLuongConLai) {
-              $_SESSION['error'] = 'Không đủ số lượng để cập nhật. Số lượng sản phẩm vượt quá tồn kho.';
-              header("Location: ?act=gio-hang"); // Redirect về trang giỏ hàng
-              exit();
-            }
-
-            // Cập nhật số lượng giỏ hàng
-            $this->modelGioHang->updateSoLuong($gioHang['id'], $sanPhamId, $soLuongMoi);
+      if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+          if (isset($_SESSION['user'])) {
+              $email = $this->modelTaiKhoan->getAllTaiKhoanformEmail($_SESSION['user']['email']);
+              $gioHang = $this->modelGioHang->getGioHangFromUser($email['id']);
+  
+              if (isset($_POST['so_luong'])) {
+                  foreach ($_POST['so_luong'] as $sanPhamId => $soLuongMoi) {
+                      // Lấy thông tin sản phẩm
+                      $sanPham = $this->modelSanPham->getSanPhamById($sanPhamId);
+                      $tonKho = $sanPham['so_luong'] ?? 0;
+  
+                      // Kiểm tra số lượng yêu cầu có vượt quá tồn kho không
+                      if ($soLuongMoi > $tonKho) {
+                          $_SESSION['error'] = "Không thể cập nhật sản phẩm <b>{$sanPham['ten']}</b> vì số lượng yêu cầu ({$soLuongMoi}) vượt quá tồn kho ({$tonKho}).";
+                          header("Location: ?act=gio-hang");
+                          exit();
+                      }
+  
+                      // Nếu hợp lệ thì cập nhật
+                      $this->modelGioHang->updateSoLuong($gioHang['id'], $sanPhamId, $soLuongMoi);
+                  }
+  
+                  unset($_SESSION['error']);
+                  header("Location:?act=gio-hang");
+                  exit();
+              }
           }
-          header("Location:?act=gio-hang");  // Điều hướng lại trang giỏ hàng
-        }
       }
-    }
   }
+  
+  
+  
+  
+  
+
 
 
 
@@ -341,20 +351,25 @@ class HomeController
     // Kiểm tra đơn hàng
     $donHang = $this->modelDonHang->getDonHangById($donHangId);
     if (!$donHang) {
-      echo "Đơn hàng không tồn tại.";
+      $_SESSION['message'] = "Đơn hàng không tồn tại.";
+      header("Location:?act=lich-su-mua-hang");
       exit;
     }
 
 
     if ($donHang['tai_khoan_id'] != $nguoi_dung_id) {
-      echo "Bạn không có quyền hủy đơn hàng này.";
-      exit;
+    $_SESSION['message'] = "Bạn không có quyền hủy đơn hàng này.";
+    header("Location:?act=lich-su-mua-hang");
+    exit;
+   
     }
 
     if ($donHang['trang_thai_don_hang_id'] != 1) {
-      echo "Chỉ đơn hàng 'Chưa Xác Nhận' mới có thể hủy.";
+      $_SESSION['message'] = "❌ Chỉ đơn hàng 'Chờ xác nhận' mới có thể hủy.";
+      header("Location:?act=lich-su-mua-hang");
       exit;
     }
+    
 
     // Lấy chi tiết đơn hàng để cập nhật lại số lượng sản phẩm trong kho
     $chiTietDonHang = $this->modelDonHang->getChiTietDonHangByOrderId($donHangId);
@@ -457,26 +472,26 @@ class HomeController
 
   public function timDonHang()
   {
-    // var_dump($_POST);
-    // Lấy các tham số từ POST thay vì GET
-    $search = isset($_POST['search']) ? $_POST['search'] : '';
-    $status = isset($_POST['status']) ? $_POST['status'] : '';
+      $search = isset($_POST['search']) ? $_POST['search'] : '';
+      $status = isset($_POST['status']) ? $_POST['status'] : '';
+      $userId = $_SESSION['user']['id']; // user hiện tại
+  
+      // Chuẩn hóa chuỗi tìm kiếm (viết hoa, bỏ khoảng trắng)
+      $normalizedSearch = preg_replace('/[^a-zA-Z0-9]/', '', strtoupper(trim($search)));
+  
+      // Gọi model: nếu không nhập gì, truyền rỗng để lấy tất cả đơn hàng của user
+      $donHangs = $this->modelDonHang->searchOrders($userId, $normalizedSearch, $status);
 
-    // Gọi model để tìm kiếm đơn hàng
-    $donHangs = $this->modelDonHang->searchOrders($search, $status);
-
-    $arrtrangThai = $this->modelDonHang->getTrangThai();
-    $trangThaiDonHang = array_column($arrtrangThai, 'trang_thai_don_hang', 'id');
-    $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
-
-    // Lay ra phuong thai thanh toan
-
-    $arrPTTT = $this->modelDonHang->getPttt();
-    $pTTT = array_column($arrPTTT, 'phuong_thuc_thanh_toan', 'id');
-
-    // Hiển thị kết quả tìm kiếm
-    require_once './views/lichSuMuaHang.php';
+  
+      $arrtrangThai = $this->modelDonHang->getTrangThai();
+      $trangThaiDonHang = array_column($arrtrangThai, 'trang_thai_don_hang', 'id');
+      $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
+      $arrPTTT = $this->modelDonHang->getPttt();
+      $pTTT = array_column($arrPTTT, 'phuong_thuc_thanh_toan', 'id');
+  
+      require_once './views/lichSuMuaHang.php';
   }
+  
 
 
 

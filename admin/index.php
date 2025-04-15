@@ -140,7 +140,7 @@ match ($act) {
     'sua-don-hang' => (new DonHangController())->update(),
     'chi-tiet-don-hangs' => (new DonHangController())->detail(),
     // Route cho tìm kiếm
-    'search' => (new DonHangController())->search(), // Giả sử bạn muốn xử lý tìm kiếm trong DonHangController
+    'tim-don-hang' => (new DonHangController())->search(),    // Giả sử bạn muốn xử lý tìm kiếm trong DonHangController
 
 
 

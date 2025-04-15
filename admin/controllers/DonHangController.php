@@ -99,16 +99,25 @@ class DonHangController
 
     public function search()
     {
-        // Kiểm tra xem có dữ liệu tìm kiếm hay không
-        if (isset($_GET['search']) && !empty($_GET['search'])) {
-            $searchTerm = $_GET['search'];
-            // Gọi model để tìm kiếm đơn hàng theo từ khóa
-            $donhangs = $this->modelDonHang->searchDonHang($searchTerm);
+        $errors = [];
+    
+        // Kiểm tra dữ liệu đầu vào
+        if (isset($_GET['search'])) {
+            $searchTerm = trim($_GET['search']);
+    
+            if (empty($searchTerm)) {
+                $errors['search'] = 'Vui lòng nhập từ khóa tìm kiếm.';
+                $donhangs = $this->modelDonHang->getAll(); // Hiển thị lại tất cả nếu không nhập gì
+            } else {
+                $donhangs = $this->modelDonHang->searchDonHang($searchTerm);
+            }
         } else {
-            // Nếu không có tìm kiếm, lấy tất cả đơn hàng
             $donhangs = $this->modelDonHang->getAll();
         }
-
+    
+        // Truyền biến lỗi nếu có
         require_once "./views/donhang/list_don_hang.php";
     }
+    
+    
 }

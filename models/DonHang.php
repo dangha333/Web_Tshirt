@@ -2,6 +2,12 @@
 
 class DonHang
 {
+  const TRANG_THAI_CHO_XAC_NHAN = 1;
+const TRANG_THAI_DA_XAC_NHAN = 2;
+const TRANG_THAI_DANG_GIAO = 3;
+const TRANG_THAI_DA_GIAO = 4;
+const TRANG_THAI_HOAN_THANH = 5;
+const TRANG_THAI_DA_HUY = 7;
   public $conn;
   public function __construct()
   {
@@ -10,35 +16,31 @@ class DonHang
   public function getAllChiTietDonHang($donHangId)
   {
     try {
-      // Câu truy vấn INNER JOIN với tên bảng đầy đủ
       $sql = "
-                SELECT 
-                    chi_tiet_don_hangs.id AS chi_tiet_id,
-                    don_hangs.ma_don_hang AS ma_don_hang,
-                    san_phams.ten AS ten_san_pham,
-                    chi_tiet_don_hangs.so_luong,
-                    chi_tiet_don_hangs.don_gia,
-                    chi_tiet_don_hangs.tong_tien
-                FROM 
-                    chi_tiet_don_hangs
-                INNER JOIN 
-                    don_hangs ON chi_tiet_don_hangs.don_hang_id = don_hangs.id
-                INNER JOIN 
-                    san_phams ON chi_tiet_don_hangs.san_pham_id = san_phams.id
-                ORDER BY 
-                    chi_tiet_don_hangs.id ASC
-            ";
-
-      // Chuẩn bị và thực thi truy vấn
+        SELECT 
+          chi_tiet_don_hangs.id AS chi_tiet_id,
+          don_hangs.ma_don_hang AS ma_don_hang,
+          san_phams.ten AS ten_san_pham,
+          chi_tiet_don_hangs.so_luong,
+          chi_tiet_don_hangs.don_gia,
+          chi_tiet_don_hangs.tong_tien
+        FROM 
+          chi_tiet_don_hangs
+        INNER JOIN don_hangs ON chi_tiet_don_hangs.don_hang_id = don_hangs.id
+        INNER JOIN san_phams ON chi_tiet_don_hangs.san_pham_id = san_phams.id
+        WHERE chi_tiet_don_hangs.don_hang_id = :don_hang_id
+        ORDER BY chi_tiet_don_hangs.id ASC
+      ";
+  
       $stmt = $this->conn->prepare($sql);
-      $stmt->execute();
-
-      // Trả về dữ liệu
+      $stmt->execute([':don_hang_id' => $donHangId]);
+  
       return $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (Exception $e) {
       echo 'Lỗi: ' . $e->getMessage();
     }
   }
+  
 
   public function addDonHang($ho_ten_nguoi_nhan, $email_nguoi_nhan, $dia_chi_nguoi_nhan, $sdt_nguoi_nhan, $ghi_chu, $phuong_thuc_thanh_toan_id, $tong_tien, $ngay_dat_hang, $trang_thai_don_hang_id, $tai_khoan_id, $ma_don_hang)
   {
@@ -195,31 +197,28 @@ WHERE don_hangs.id = :id";
     }
   }
 
-  public function searchOrders($search, $status)
+  public function searchOrders($userId, $searchTerm = '', $status = '')
   {
-
-    $query = "SELECT don_hangs.*, trang_thai_don_hangs.trang_thai_don_hang FROM don_hangs JOIN trang_thai_don_hangs ON don_hangs.trang_thai_don_hang_id = trang_thai_don_hangs.id ";
-
-    if ($search) {
-      $query .= " AND ma_don_hang LIKE :search";
-    }
-    if ($status) {
-      $query .= " AND trang_thai_don_hang_id = :status";
-    }
-
-    $stmt = $this->conn->prepare($query);
-
-    if ($search) {
-      $stmt->bindValue(':search', "%$search%");
-    }
-    if ($status) {
-      $stmt->bindValue(':status', $status);
-    }
-
-    $stmt->execute();
-
-    return $stmt->fetchAll();  // Trả về kết quả tìm kiếm
+      $sql = "SELECT * FROM don_hangs WHERE tai_khoan_id = :userId";
+      $params = [':userId' => $userId];
+  
+      if (!empty($searchTerm)) {
+          $sql .= " AND REPLACE(UPPER(ma_don_hang), ' ', '') LIKE :searchTerm";
+          $params[':searchTerm'] = "%" . $searchTerm . "%";
+      }
+  
+      if (!empty($status)) {
+          $sql .= " AND trang_thai_don_hang_id = :status";
+          $params[':status'] = $status;
+      }
+  
+      $stmt = $this->conn->prepare($sql);
+      $stmt->execute($params);
+      return $stmt->fetchAll();
   }
+  
+  
+
   public function addChiTietDonHang($donHangId, $sanPhamId, $donGia, $soLuong, $tongTien)
   {
     try {

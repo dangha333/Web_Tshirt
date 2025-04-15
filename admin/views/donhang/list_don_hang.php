@@ -68,13 +68,17 @@
                                 <div class="card">
                                     <div class="card-header align-items-center d-flex">
                                         <h4 class="card-title mb-0 flex-grow-1">Danh sách đơn hàng</h4>
-                                        <form class="app-search d-none d-md-block" method="get" action="">
-                                            <div class="position-relative">
-                                                <input type="text" class="form-control" name="search" placeholder="Search by Order Code or Phone Number" value="<?= isset($_GET['search']) ? $_GET['search'] : ''; ?>">
-                                                <span class="mdi mdi-magnify search-widget-icon"></span>
-                                                <span class="mdi mdi-close-circle search-widget-icon search-widget-icon-close d-none" id="search-close-options"></span>
-                                            </div>
+                                        <form action="?act=tim-don-hang" method="get">
+                                            <input type="hidden" name="act" value="tim-don-hang">
+                                            <input type="text" name="search" placeholder="Nhập mã đơn hàng hoặc tên người dùng..." value="<?= $_GET['search'] ?? '' ?>">
+                                            <button type="submit">Tìm kiếm</button>
                                         </form>
+                                        <br>
+                                        <?php if (!empty($errors['search'])): ?>
+                                            <p style="color: red;"><?= $errors['search'] ?></p>
+                                        <?php endif; ?>
+
+
 
                                     </div><!-- end card header -->
 

@@ -4,33 +4,36 @@
             <div class="section-container">
                 <div class="block-widget-wrap">
                     <div class="row">
-                        <div class="col-lg-3 col-md-6 column-1">
-                            <div class="block block-menu m-b-20">
-                                <h2 class="block-title">Liên hệ với chúng tôi</h2>
-                                <div class="block-content">
-                                    <ul>
-                                        <li>
-                                            <span>Trụ sở chính:</span> Trịnh Văn Bô - Nam Từ Liêm - Hà Nội
-                                        </li>
-                                        <li>
-                                            <span>Điện thoại:</span> 01743 234500
-                                        </li>
-                                        <li>
-                                            <span>Email:</span> <a href="mailto:support@mojuri.com">support@oulook.com</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                    <div class="col-lg-3 col-md-6 column-1">
+    <div class="block block-menu m-b-20">
+        <h2 class="block-title">Liên hệ với chúng tôi</h2>
+        <div class="block-content">
+            <ul>
+                <li>
+                    <span>Trụ sở chính:</span> Trịnh Văn Bô - Nam Từ Liêm - Hà Nội
+                </li>
+                <li>
+                    <span>Điện thoại:</span> 01743 234500
+                </li>
+                <li>
+                    <span>Email:</span> <a href="mailto:support@oulook.com">support@oulook.com</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 
-                            <div class="block block-social">
-                                <ul class="social-link">
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-behance"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
+    <div class="block block-social">
+        <h2 class="block-title">Theo dõi chúng tôi</h2>
+        <div class="block-content">
+            <ul class="social-link">
+                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
                         <div class="col-lg-3 col-md-6 column-2">
                             <div class="block block-menu">
                                 <h2 class="block-title">Dịch vụ khách hàng</h2>
@@ -86,13 +89,18 @@
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6 column-4">
-                            <div class="block block-menu">
-                                <h2 class="block-title">Danh mục</h2>
-                                <div class="block-content">
-                                    <ul>
-                                       
-                                    </ul>
-                                </div>
+                        <div class="block block-menu">
+                            <h2 class="block-title">Danh mục</h2>
+                            <div class="block-content">
+                                <ul>
+                                    <?php foreach ($listDanhMuc as $danhMuc): ?>
+                                        <li>
+                                            <a href="?act=danh-muc-san-pham&iddm=<?= $danhMuc['id'] ?>">
+                                                <?= $danhMuc['ten_danh_muc'] ?>
+                                            </a>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
                             </div>
                         </div>
                     </div>
