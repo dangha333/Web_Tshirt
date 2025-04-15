@@ -45,6 +45,7 @@ class GioHang
     }
     public function addGioHang($id)
     {
+        
         try {
             $sql = 'INSERT INTO gio_hangs (tai_khoan_id) VALUES (:id)';
 
@@ -56,6 +57,7 @@ class GioHang
         } catch (Exception $e) {
             echo "Lỗi" . $e->getMessage();
         }
+
     }
     public function updateSoLuong($gio_hang_id, $san_pham_id, $so_luong)
     {
@@ -82,19 +84,17 @@ class GioHang
             return false; // Trả về false nếu có lỗi xảy ra
         }
     }
-    public function addDetailGioHang($gio_hang_id, $san_pham_id, $so_luong)
+    public function addDetailGioHang($gio_hang_id, $san_pham_id, $so_luong, $size, $color)
     {
         try {
-            var_dump($gio_hang_id, $san_pham_id, $so_luong);
-            $sql = 'INSERT INTO chi_tiet_gio_hangs (gio_hang_id, san_pham_id, so_luong) VALUES (:gio_hang_id, :san_pham_id, :so_luong)';
-
+            $sql = "INSERT INTO chi_tiet_gio_hangs (gio_hang_id, san_pham_id, so_luong, size, color) 
+                    VALUES (?, ?, ?, ?, ?)";
             $stmt = $this->conn->prepare($sql);
-
-            $stmt->execute([':gio_hang_id' => $gio_hang_id, ':san_pham_id' => $san_pham_id, ':so_luong' => $so_luong]);
-
-            return true;
-        } catch (Exception $e) {
-            echo "Lỗi" . $e->getMessage();
+            $stmt->execute([$gio_hang_id, $san_pham_id, $so_luong, $size, $color]);
+            return true; // Trả về true nếu thành công
+        } catch (PDOException $e) {
+            echo "Lỗi khi thêm chi tiết giỏ hàng: " . $e->getMessage();
+            return false;
         }
     }
     public function getSoLuongSanPham($san_pham_id)

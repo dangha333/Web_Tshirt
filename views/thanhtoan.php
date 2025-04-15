@@ -94,7 +94,10 @@
                                             <span><?= number_format($sanPham['gia_ban'], 0, ',', '.') ?>đ</span>
                                         <?php } ?>
                                         <br>
-                                        <span>Số lượng: <?= $sanPham['so_luong'] ?></span>
+                                        <span>Số lượng: <?= $sanPham['so_luong'] ?></span><br>
+                                        <span>Màu Sắc: <?= $sanPham['color'] ?></span><br>
+                                        <span>Kích Cỡ: <?= $sanPham['size'] ?></span>
+
                                     </div>
                                     <div class="product-subtotal">
                                         <?php

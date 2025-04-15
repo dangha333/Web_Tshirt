@@ -103,7 +103,27 @@
                                                                     name="so_luong">
                                                                 <button type="button" class="minus">-</button>
                                                             </div>
-                                                            <div class="btn-add-to-cart1">
+                                                            
+
+    <label for="size">Size:</label>
+    <select name="size" id="size" required>
+        <option value="M">M</option>
+        <option value="L">L</option>
+        <option value="XL">Xl</option>
+    </select>
+
+    <label for="color">Màu sắc:</label>
+    <select name="color" id="color" required>
+        <option value="Đen">Đen</option>
+        <option value="Trắng">Trắng</option>
+        <option value="Xanh Rêu">Xanh Rêu</option>
+        <option value="Ghi">Ghi</option>
+        <option value="Xám">Xám</option>
+        <option value="Đỏ">Đỏ</option>
+        <option value="Nâu">Nâu</option>
+    </select>
+
+                                                     <div class="btn-add-to-cart1">
                                                                 <button tabindex="0">Thêm giỏ hàng</button>
 
                                                             </div>
