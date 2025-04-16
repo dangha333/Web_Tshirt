@@ -1,0 +1,13 @@
+<div class="product-thumb-hover">
+                                                                            <a
+                                                                                href="?act=chitietsanpham&id=<?= $sanPham['id'] ?>">
+                                                                                <img width="600" height="600"
+                                                                                    src="<?= 'http://localhost/web_Tshirt/' . $sanPham['img'] ?>"
+                                                                                    class="post-image" alt="">
+                                                                                <img width="600" height="600"
+                                                                                    src="<?= 'http://localhost/web_Tshirt/' . $sanPham['img'] ?>"
+                                                                                    class="hover-image back" alt="">
+                                                                            </a>
+                                                                        </div>
+
+        aaa 

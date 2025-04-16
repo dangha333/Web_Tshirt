@@ -45,31 +45,28 @@ $tongGioHang = 0;
     <div id="page" class="hfeed page-wrapper">
         <?php require_once('views/layout/menu.php'); ?>
 
-        <head>
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-        </head>
-        <main><br><br><br><br>
-            <div class="mb-4 pb-4"></div>
-            <section class="shop-checkout container">
-                <div class="checkout-steps"></div>
-                <div class="shopping-cart mb-5">
-                    <div class="cart-table__wrapper">
-                        <form action="?act=cap-nhat-gio-hang" method="POST" class="position-relative bg-body">
-                            <table class="cart-table">
-                                <thead>
-                                    <tr>
-                                        <th>Ảnh sản phẩm</th>
-                                        <th>Tên</th>
-                                        <th>Giá tiền</th>
-                                        <th>Màu sắc</th>
-                                        <th>Kích cỡ</th>
-                                        <th>Số lượng</th>
-                                        <th>Tổng tiền</th>
-                                        <th>Hủy</th>
-                                    </tr>
-                                </thead>
-
-                                <tbody>
+    <head>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    </head>
+    <main><br><br><br><br>
+      <div class="mb-4 pb-4"></div>
+      <section class="shop-checkout container">
+        <div class="checkout-steps"></div>
+        <div class="shopping-cart mb-5">
+          <div class="cart-table__wrapper">
+            <form action="?act=cap-nhat-gio-hang" method="POST" class="position-relative bg-body">
+              <table class="cart-table">
+                <thead>
+                  <tr>
+                    <th>Ảnh sản phẩm</th>
+                    <th>Tên</th>
+                    <th>Giá tiền</th>
+                    <th>Số lượng</th>
+                    <th>Tổng tiền</th>
+                    <th>Hủy</th>
+                  </tr>
+                </thead>
+                     <tbody>
                                     <?php if (empty($chiTietGioHang)): ?>
                                         <tr>
                                             <td colspan="8">Giỏ hàng của bạn đang trống.</td>

@@ -90,24 +90,7 @@
                                 <h2 class="block-title">Danh mục</h2>
                                 <div class="block-content">
                                     <ul>
-                                        <li>
-                                            <a href="shop-grid-left.html">Bông tai</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-left.html">Dây chuyền</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-left.html">Vòng tay</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-left.html">Nhẫn</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-left.html">Hộp đựng trang sức</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-left.html">Trâm</a>
-                                        </li>
+                                       
                                     </ul>
                                 </div>
                             </div>
@@ -163,12 +146,7 @@
                 
                 <div class="content-menu_search">
                     <label>Đề xuất</label>
-                    <ul id="menu_search" class="menu">
-                        <li><a href="#">Bông tai</a></li>
-                        <li><a href="#">Dây chuyền</a></li>
-                        <li><a href="#">Nhẫn</a></li>
-                        <li><a href="#">Hộp đựng trang sức</a></li>
-                    </ul>
+                   
                 </div>
             </div>
         </form>

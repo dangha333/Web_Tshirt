@@ -13,56 +13,32 @@ class SanPhamController
         // Lấy số sản phẩm mỗi trang và trang hiện tại từ URL
         $item_per_page = !empty($_GET['per_page']) ? (int)$_GET['per_page'] : 9;
         $current_page = !empty($_GET['page']) ? (int)$_GET['page'] : 1;
-
-        // Lấy sản phẩm từ model
-        $listSanPham = $this->modelSanPham->getAlllSanPham($item_per_page, $current_page);
-        $products = $this->modelSanPham->getAllSanPham();
-        $totalProducts = $this->modelSanPham->getTotalProducts();
-        $totalPages = ceil($totalProducts / $item_per_page); // Tính số trang
-
+    
         // Lấy danh mục sản phẩm
         $listDanhMuc = $this->modelSanPham->getAllDanhMuc();
-
-
-
-        // Yêu cầu view danh sách sản phẩm
-
-
-
-        // Biến lưu tên file view sẽ được gọi
-        $viewFile = './views/danhsachsanpham.php';
-
+    
         // Kiểm tra nếu có id danh mục trong URL
-
-        $danhMucId = $_GET['iddm'] ?? 0; // Lấy id danh mục từ URL
+        $danhMucId = $_GET['iddm'] ?? 0;
+        
         if (isset($_GET['iddm'])) {
-            // Nhận tên sản phẩm từ form tìm kiếm
-            $iddm = $_GET['iddm'];
-
-            // Gọi phương thức tìm sản phẩm theo danh mục
+            // Lấy sản phẩm theo danh mục
             $listSanPhamById = $this->modelSanPham->getSanPhamByDanhMucId($danhMucId);
-
-            // Chuyển view sang danh mục sản phẩm
+            $totalProducts = count($listSanPhamById);
+            $totalPages = 1; // Không phân trang khi xem theo danh mục
         } elseif (isset($_GET['search'])) {
-            // Kiểm tra nếu có tìm kiếm từ form
+            // Xử lý tìm kiếm
             $searchTerm = $_GET['search'];
-            // Gọi phương thức tìm sản phẩm theo từ khóa tìm kiếm
             // $listSanPhamBySearch = $this->modelSanPham->searchSanPham($searchTerm);
-
-            // Chuyển view sang tìm kiếm sản phẩm
-            $viewFile = './views/sanpham/tim_kiem_san_pham.php';
+            // $totalProducts = count($listSanPhamBySearch);
+            // $totalPages = ceil($totalProducts / $item_per_page);
+        } else {
+            // Lấy tất cả sản phẩm (phân trang)
+            $products = $this->modelSanPham->getAlllSanPham($item_per_page, $current_page);
+            $totalProducts = $this->modelSanPham->getTotalProducts();
+            $totalPages = ceil($totalProducts / $item_per_page);
         }
-
-
-
-        // var_dump($danhmucs);
-
+    
         require_once './views/danhsachsanpham.php';
-        require_once './views/Home.php';
-        // require_once './views/sanpham/danh_muc_san_pham.php';
-
-        // Gửi thông tin cho view
-        require_once $viewFile;
     }
 
 

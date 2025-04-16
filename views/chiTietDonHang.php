@@ -210,7 +210,7 @@
                                                                 </tr>
                                                             </tbody>
                                                         </table>
-                                                        <a href="?act=tin-tuc" class="btn btn-primary">
+                                                        <a href="?act=danhsachsanpham" class="btn btn-primary">
                                                             <i class="fas fa-tags"></i>
                                                             Tiếp tục mua sắm
                                                         </a>

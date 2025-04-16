@@ -34,7 +34,7 @@ class HomeController
 
             } else {
                 $_SESSION['flash'] = $user;
-                header("Location: ?act=login-admin");
+                header("Location: ?act=login");
                 exit();
             }
 

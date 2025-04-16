@@ -244,9 +244,16 @@
                                                                 <?php foreach ($listSanPham as $index => $sanPham): ?>
                                                                     <tr>
                                                                         <td class="fw-medium"><?= $index + 1 ?></td>
-                                                                        <td><img src="<?= 'http://localhost/DA1-Silver_Ring' . $sanPham['img'] ?>" alt="product" width="150" height="80"
-                                                                                onerror="this.onerror=null;this.src='https://d1hjkbq40fs2x4.cloudfront.net/2017-08-21/files/landscape-photography_1645-t.jpg';">
-                                                                        </td>
+                                                                    
+                                                                       
+                                                                        <td>
+                                                                                <img width="100" height="100"
+                                                                                    src="<?= 'http://localhost/web_Tshirt/' . $sanPham['img'] ?>"
+                                                                                    class="post-image" alt="">
+                                                                                    </td>
+                                                    
+                                                                        
+                                                                        
 
                                                                         <td class="text-wrap"><?= $sanPham['ten'] ?></td>
                                                                         <td class="text-wrap"><?= $sanPham['mo_ta'] ?></td>
