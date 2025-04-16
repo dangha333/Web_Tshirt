@@ -235,4 +235,5 @@ public function getProductQuantity($sanPhamId)
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result ? $result['so_luong'] : 0; // trả về số lượng, hoặc 0 nếu không tìm thấy
 }
+
 }
