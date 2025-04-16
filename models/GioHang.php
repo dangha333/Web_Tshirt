@@ -81,7 +81,6 @@ class GioHang
         }
     }
 
-
     public function addDetailGioHang($gio_hang_id, $san_pham_id, $so_luong,$size, $color)
 
     {

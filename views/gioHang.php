@@ -54,13 +54,20 @@ $tongGioHang = 0;
         <div class="checkout-steps"></div>
         <div class="shopping-cart mb-5">
           <div class="cart-table__wrapper">
-            <form action="?act=cap-nhat-gio-hang" method="POST" class="position-relative bg-body">
+          <form action="?act=cap-nhat-gio-hang" method="POST" class="position-relative bg-body">
+  <?php if (isset($_SESSION['error'])): ?>
+    <div class="alert alert-danger">
+      <?= $_SESSION['error']; unset($_SESSION['error']); ?>
+    </div>
+  <?php endif; ?>
               <table class="cart-table">
                 <thead>
                   <tr>
                     <th>Ảnh sản phẩm</th>
                     <th>Tên</th>
                     <th>Giá tiền</th>
+                    <th> Màu Sắc </th>
+                    <th>Kích Cỡ</th>
                     <th>Số lượng</th>
                     <th>Tổng tiền</th>
                     <th>Hủy</th>

@@ -61,6 +61,9 @@ class HomeController
               $so_luong = $_POST['so_luong'];
               $size = $_POST['size'] ?? '--'; // Lấy size từ form, mặc định là '--' nếu không có
               $color = $_POST['color'] ?? '--'; // Lấy color từ form, mặc định là '--' nếu không có
+        $san_pham_id = $_POST['san_pham_id'];
+        $so_luong = (int) $_POST['so_luong']; 
+
 
               // Lấy chi tiết giỏ hàng hiện tại
               $chiTietGioHang = $this->modelGioHang->getDetailGioHang($gioHang['id']);
