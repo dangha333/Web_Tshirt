@@ -2,7 +2,6 @@
 
 <body class="shop">
     <?php require_once 'views/layout/menu.php'; ?>
-    <div id="page" class="hfeed page-wrapper">
         <div id="site-main" class="site-main">
             <div id="main-content" class="main-content">
                 <div id="primary" class="content-area">
@@ -220,9 +219,29 @@
                                         </div>
 
                                         <!-- Phân Trang -->
-                                        <nav class="pagination">
-                                            <?php require_once 'views/layout/pagination.php'; ?>
-                                        </nav>
+                                        <?php if ((!isset($_GET['iddm']) && $totalPages > 1) || (isset($listSanPhamById) && count($listSanPhamById) > $item_per_page)): ?>
+                                            <nav class="pagination">
+                                                <ul class="page-numbers">
+                                                    <?php if ($current_page > 1): ?>
+                                                        <li><a class="prev page-numbers" href="?act=danhsachsanpham&per_page=<?= $item_per_page ?>&page=<?= $current_page - 1 ?>">Previous</a></li>
+                                                    <?php endif; ?>
+
+                                                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                                                        <li>
+                                                            <?php if ($i === $current_page): ?>
+                                                                <span aria-current="page" class="page-numbers current"><?= $i ?></span>
+                                                            <?php else: ?>
+                                                                <a class="page-numbers" href="?act=danhsachsanpham&per_page=<?= $item_per_page ?>&page=<?= $i ?>"><?= $i ?></a>
+                                                            <?php endif; ?>
+                                                        </li>
+                                                    <?php endfor; ?>
+
+                                                    <?php if ($current_page < $totalPages): ?>
+                                                        <li><a class="next page-numbers" href="?act=danhsachsanpham&per_page=<?= $item_per_page ?>&page=<?= $current_page + 1 ?>">Next</a></li>
+                                                    <?php endif; ?>
+                                                </ul>
+                                            </nav>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -231,12 +250,19 @@
                 </div><!-- #primary -->
             </div><!-- #main-content -->
         </div>
-
+        </div>
+                                                            </body>
         <?php require_once './views/layout/footer.php'; ?>
 
+    
+    <?php if (!empty($products) || !empty($listSanPhamById)): ?>
+    <!-- Hiển thị sản phẩm -->
+    <div class="tab-content">
+        <!-- ... nội dung hiển thị sản phẩm ... -->
     </div>
-    <?php if (empty($products)): ?>
-        <div class="alert alert-warning" role="alert">
-            Không có sản phẩm nào phù hợp với tiêu chí lọc của bạn.
-        </div>
-    <?php endif; ?>
+    
+    <!-- Phân trang (chỉ hiển thị khi cần) -->
+   
+<?php else: ?>
+    <div class="alert alert-warning">Không có sản phẩm nào</div>
+<?php endif; ?>

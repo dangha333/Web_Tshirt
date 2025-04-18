@@ -4,7 +4,6 @@
     <div id="page" class="hfeed page-wrapper">
         <?php require_once 'views/layout/menu.php'; ?>
 
-
         <div id="site-main" class="site-main">
             <div id="main-content" class="main-content">
                 <div id="primary" class="content-area">
@@ -17,8 +16,7 @@
                             </div>
                             <div class="breadcrumbs">
                                 <a href="?act=home">Trang chủ</a><span class="delimiter"></span><a
-                                    href="?act=danhsachsanpham">Shop</a><span class="delimiter"></span> Chi tiết sản
-                                phẩm
+                                    href="?act=danhsachsanpham">Shop</a><span class="delimiter"></span> Chi tiết sản phẩm
                             </div>
                         </div>
                     </div>
@@ -74,7 +72,6 @@
                                                 </div>
                                             </div>
 
-
                                             <div class="product-info col-lg-5 col-md-12 col-12">
                                                 <h1 class="title"><?= $chiTietSanPham['ten']; ?></h1>
                                                 <span class="price">
@@ -103,94 +100,83 @@
                                                                     name="so_luong">
                                                                 <button type="button" class="minus">-</button>
                                                             </div>
+
+                                                            <label for="size">Size:</label>
+                                                            <select name="size" id="size" required onchange="updateProductImage()">
+                                                                <option value="M">M</option>
+                                                                <option value="L">L</option>
+                                                                <option value="XL">XL</option>
+                                                            </select>
+
+                                                            <label for="color">Màu sắc:</label>
+                                                            <select name="color" id="color" required onchange="updateProductImage()">
+                                                                <option value="Đen">Đen</option>
+                                                                <option value="Trắng">Trắng</option>
+                                                                <option value="Xanh Rêu">Xanh Rêu</option>
+                                                                <option value="Ghi">Ghi</option>
+                                                                <option value="Xám">Xám</option>
+                                                                <option value="Đỏ">Đỏ</option>
+                                                                <option value="Nâu">Nâu</option>
+                                                            </select>
+
                                                             <div class="btn-add-to-cart1">
                                                                 <button tabindex="0">Thêm giỏ hàng</button>
-
                                                             </div>
                                                         </div>
+                                                    </div>
                                                 </form>
                                                 <style>
                                                     /* Phong cách cho nút Thêm giỏ hàng */
                                                     .btn-add-to-cart1 button {
                                                         background-color: black;
-                                                        /* Màu nền đen */
                                                         color: white;
-                                                        /* Màu chữ trắng */
                                                         border: none;
-                                                        /* Bỏ viền */
                                                         padding: 10px 20px;
-                                                        /* Khoảng cách bên trong nút */
-
                                                         cursor: pointer;
-                                                        /* Con trỏ thay đổi thành dạng nhấp chuột */
                                                         border-radius: 5px;
-                                                        /* Bo góc */
                                                         transition: all 0.3s ease;
-                                                        /* Hiệu ứng mượt khi hover */
                                                         width: 200px;
-                                                        /* Đặt cùng chiều rộng */
                                                         height: 50px;
                                                     }
 
                                                     .btn-add-to-cart1 button:hover {
                                                         background-color: #444444;
-                                                        /* Màu nền khi hover */
                                                         color: #ffff;
-                                                        /* Màu chữ khi hover */
                                                         transform: scale(1.05);
-                                                        /* Tăng kích thước một chút khi hover */
                                                         background-color: #b76e4e;
                                                     }
 
-                                                    /* Đảm bảo căn chỉnh nút trong layout */
                                                     .add-to-cart-wrap {
                                                         display: flex;
                                                         align-items: center;
                                                         justify-content: flex-start;
-                                                        /* Căn nút về bên trái */
                                                         gap: 15px;
-                                                        /* Khoảng cách giữa các phần tử */
                                                     }
-
 
                                                     .btn-add-to-cart button {
                                                         background-color: transparent;
-                                                        /* Nền trong suốt cho nút */
                                                         color: white;
-                                                        /* Màu chữ trắng */
                                                         border: none;
-                                                        /* Không viền */
                                                         padding: 10px 20px;
-                                                        /* Padding cho nút */
                                                         font-size: 16px;
-                                                        /* Kích thước chữ */
                                                         font-family: Arial, sans-serif;
-                                                        /* Font chữ */
                                                         cursor: pointer;
-                                                        /* Hiển thị con trỏ khi di chuột qua */
                                                         border-radius: 5px;
-                                                        /* Bo góc */
                                                         transition: background-color 0.3s;
-                                                        /* Hiệu ứng chuyển màu khi hover */
                                                     }
 
                                                     .btn-add-to-cart button:hover {
                                                         background-color: #A65E4E;
-                                                        /* Màu nền khi hover */
                                                     }
 
                                                     .btn-add-to-cart button:focus {
                                                         outline: none;
-                                                        /* Ẩn viền mặc định khi nút được chọn */
                                                         box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-                                                        /* Hiệu ứng nhấn */
                                                     }
 
                                                     .btn-quick-buy button {
                                                         border-radius: 5px;
-                                                        /* Bo góc */
                                                         transition: all 0.3s ease;
-                                                        /* Hiệu ứng mượt khi hover */
                                                     }
                                                 </style>
 
@@ -200,8 +186,8 @@
                                                 <div class="btn-wishlist" data-title="Wishlist">
                                                     <button class="product-btn">Thêm vào danh sách yêu thích</button>
                                                 </div>
-
                                             </div>
+
                                             <div class="product-meta">
                                                 <span class="sku-wrapper">Mã đơn hàng: <span
                                                         class="sku"><?= $chiTietSanPham['ma_san_pham']; ?></span></span>
@@ -233,10 +219,8 @@
                                                 <a class="nav-link active" data-toggle="tab" href="#description"
                                                     role="tab">Mô tả</a>
                                             </li>
-
                                             <li class="nav-item">
-                                                <a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Bình
-                                                    luận</a>
+                                                <a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Bình luận</a>
                                             </li>
                                         </ul>
                                         <div class="tab-content">
@@ -254,16 +238,13 @@
                                                 </table>
                                             </div>
                                             <div class="tab-pane fade" id="reviews" role="tabpanel">
-
                                                 <div id="reviews" class="product-reviews">
-
                                                     <div id="comments">
                                                         <h2 class="reviews-title">Những bình luận cho
                                                             <span><?= $chiTietSanPham['ten']; ?></span>
                                                         </h2>
                                                         <ol class="comment-list">
                                                             <li class="review">
-
                                                                 <?php foreach ($listBinhLuan as $BinhLuan): ?>
                                                                     <div class="content-comment-container">
                                                                         <div class="comment-container">
@@ -271,9 +252,7 @@
                                                                                 class="avatar" height="60" width="60"
                                                                                 alt="">
                                                                             <div class="comment-text">
-                                                                                <div class="rating small">
-
-                                                                                </div>
+                                                                                <div class="rating small"></div>
                                                                                 <div class="review-author">
                                                                                     <?= $BinhLuan['ten_nguoi_binh_luan']; ?>
                                                                                 </div>
@@ -285,7 +264,6 @@
                                                                         <div class="description">
                                                                             <p> <?= $BinhLuan['noi_dung']; ?> </p>
                                                                         </div>
-
                                                                     </div>
                                                                 <?php endforeach; ?>
                                                             </li>
@@ -300,51 +278,34 @@
                                                                     <span id="email-notes">Địa chỉ email của bạn sẽ
                                                                         không được công bố.</span> 
                                                                 </p>
-                                                                <!-- <div class="comment-form-rating">
-                                                                            <label for="rating">Đánh giá của bạn</label>
-                                                                            <p class="starss">
-                                                                                <span>
-                                                                                    <a class="star-1" href="#" data-rating="1">★</a>
-                                                                                    <a class="star-2" href="#" data-rating="2">★</a>
-                                                                                    <a class="star-3" href="#" data-rating="3">★</a>
-                                                                                    <a class="star-4" href="#" data-rating="4">★</a>
-                                                                                    <a class="star-5" href="#" data-rating="5">★</a>
-                                                                                </span>
-                                                                            </p>
-                                                                        </div> -->
                                                                 <div class="comment-form-container">
-                                                                <?php if (isset($_SESSION['user'])): ?>
-
-                                                                    <div class="comment-form-comment">
-                                                                        <label for="comment">Bình luận của bạn *</label>
-                                                                        <textarea id="comment" name="comment"
-                                                                            placeholder="Bình luận của bạn" cols="45"
-                                                                            rows="8" aria-required="true"
-                                                                            required></textarea>
-                                                                    </div>
-                                                                    <input type="hidden" name="san_pham_id"
-                                                                        value="<?= $san_pham_id ?>">
-
-                                                                    <p class="form-submit">
-                                                                        <input name="submit" type="submit" id="submit"
-                                                                            class="submit" value="Gửi">
-                                                                    </p>
+                                                                    <?php if (isset($_SESSION['user'])): ?>
+                                                                        <div class="comment-form-comment">
+                                                                            <label for="comment">Bình luận của bạn *</label>
+                                                                            <textarea id="comment" name="comment"
+                                                                                placeholder="Bình luận của bạn" cols="45"
+                                                                                rows="8" aria-required="true"
+                                                                                required></textarea>
+                                                                        </div>
+                                                                        <input type="hidden" name="san_pham_id"
+                                                                            value="<?= $san_pham_id ?>">
+                                                                        <p class="form-submit">
+                                                                            <input name="submit" type="submit" id="submit"
+                                                                                class="submit" value="Gửi">
+                                                                        </p>
                                                                     <?php else: ?>
-    <p style="color: red;">Bạn cần <a href="?act=dangnhap">đăng nhập</a> để bình luận.</p>
-<?php endif; ?>
+                                                                        <p style="color: red;">Bạn cần <a href="?act=dangnhap">đăng nhập</a> để bình luận.</p>
+                                                                    <?php endif; ?>
                                                                 </div>
                                                             </form>
                                                         </div>
                                                     </div>
 
                                                     <style>
-                                                        /* Container for the comment form */
                                                         .comment-form-container {
                                                             width: 100%;
-
                                                             margin: 0 auto;
                                                             padding: 20px;
-
                                                             border: 1px solid #ddd;
                                                             border-radius: 8px;
                                                         }
@@ -355,8 +316,6 @@
                                                             border: 1px solid #ccc;
                                                         }
 
-
-                                                        /* Style for the textarea */
                                                         .comment-form-comment textarea {
                                                             width: 100%;
                                                             padding: 12px;
@@ -367,13 +326,11 @@
                                                             box-sizing: border-box;
                                                         }
 
-                                                        /* Add some margin between the textarea and submit button */
                                                         .form-submit {
                                                             text-align: right;
                                                             margin-top: 15px;
                                                         }
 
-                                                        /* Style for the submit button */
                                                         .form-submit .submit {
                                                             padding: 10px 20px;
                                                             font-size: 16px;
@@ -389,7 +346,6 @@
                                                             background-color: #45a049;
                                                         }
 
-                                                        /* Add responsiveness */
                                                         @media (max-width: 600px) {
                                                             .comment-form-container {
                                                                 padding: 15px;
@@ -405,60 +361,41 @@
                                                             }
                                                         }
 
-                                                        /* Mặc định màu của các sao */
                                                         .starss a {
                                                             text-decoration: none;
                                                             color: gray;
-                                                            /* Màu xám cho sao chưa chọn */
                                                             font-size: 30px;
-                                                            /* Kích thước sao */
                                                             margin-right: 5px;
-                                                            /* Khoảng cách giữa các sao */
                                                         }
 
-                                                        /* Khi sao được chọn (có lớp 'active') */
                                                         .starss a.active {
                                                             color: gold;
-                                                            /* Màu vàng khi sao được chọn */
                                                         }
 
-                                                        /* Khi hover (di chuột lên sao) */
                                                         .starss a:hover {
-
                                                             color: gold;
-                                                            /* Màu vàng khi hover lên sao */
                                                         }
                                                     </style>
 
                                                     <script>
-                                                        // JavaScript để xử lý sự kiện chọn sao
                                                         const starss = document.querySelectorAll('.starss a');
                                                         const ratingInput = document.getElementById('rating');
 
                                                         starss.forEach(star => {
                                                             star.addEventListener('click', function(e) {
-                                                                e.preventDefault(); // Ngừng hành động mặc định của thẻ <a> (không reload trang)
-
-                                                                // Xóa lớp active khỏi tất cả các sao
+                                                                e.preventDefault();
                                                                 starss.forEach(star => star.classList.remove('active'));
-
-                                                                // Lấy giá trị sao được chọn
                                                                 const selectedRating = parseInt(this.getAttribute('data-rating'));
-
-                                                                // Thêm lớp active cho tất cả các sao có giá trị <= sao đã chọn
                                                                 starss.forEach(star => {
                                                                     const starRating = parseInt(star.getAttribute('data-rating'));
                                                                     if (starRating <= selectedRating) {
                                                                         star.classList.add('active');
                                                                     }
                                                                 });
-
-                                                                // Cập nhật giá trị sao vào input ẩn
                                                                 ratingInput.value = selectedRating;
                                                             });
                                                         });
                                                     </script>
-
 
                                                     <div class="clear"></div>
                                                 </div>
@@ -468,6 +405,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="product-related">
                             <div class="section-padding">
                                 <div class="section-container p-l-r">
@@ -482,8 +420,7 @@
                                                     data-columns2="3" data-columns1="3" data-columns1440="4"
                                                     data-columns="4">
                                                     <?php foreach ($listSanPhamCungDanhMuc as $key => $sanPhamLienQuan): ?>
-
-                                                        <div clas s="item-product slick-slide">
+                                                        <div class="item-product slick-slide">
                                                             <div class="items">
                                                                 <div class="products-entry clearfix product-wapper">
                                                                     <div class="products-thumb">
@@ -586,6 +523,7 @@
             </form>
         </div>
     </div>
+
     <!-- Dependency Scripts -->
     <script src="libs/popper/js/popper.min.js"></script>
     <script src="libs/jquery/js/jquery.min.js"></script>
@@ -600,14 +538,60 @@
 
     <!-- Site Scripts -->
     <script src="assets/js/app.js"></script>
+
+    <!-- Script để xử lý thay đổi ảnh chính và ảnh thumbnail -->
+    <script>
+        // Dữ liệu ảnh theo biến thể (giả lập, trong thực tế nên lấy từ cơ sở dữ liệu)
+        const variantImages = {
+            "M-Đen": "./uploads/1744196061ao-phong-nam-sieu-mong-yody-MATS25S036-SK002 (2).webp",
+            "M-Trắng": "./uploads/1744196377ao-thun-nam-yody-TSM7188-TRA (1).webp",
+            "M-Xanh Rêu": "./uploads/1744196265ao-phong-tay-raglan-yody-MATS25S028-SB009.webp",
+            "M-Ghi": "./uploads/1744196195ao-thun-nam-yody-TSM7131-GH1 (2).webp",
+            "M-Xám": "./uploads/1744196966ao-thun-thu-dong-giu-nhiet-nu-yody-ATN7009-XAM, CJN6008-XDM (4).webp",
+            "M-Đỏ": "./uploads/1744197499a-thun-tre-va-nu-yody-ATN7024-DDO (8).webp",
+            "M-Nâu": "./uploads/1744197556ao-thu-dong-nu-tre-vai-yody-ATN7020-NAU, CJN6008-XDM (4).webp",
+            "L-Đen": "./uploads/1744196061ao-phong-nam-sieu-mong-yody-MATS25S036-SK002 (2).webp",
+            "L-Trắng": "./uploads/1744196377ao-thun-nam-yody-TSM7188-TRA (1).webp",
+            "L-Xanh Rêu": "./uploads/1744196265ao-phong-tay-raglan-yody-MATS25S028-SB009.webp",
+            "L-Ghi": "./uploads/1744196195ao-thun-nam-yody-TSM7131-GH1 (2).webp",
+            "L-Xám": "./uploads/1744196966ao-thun-thu-dong-giu-nhiet-nu-yody-ATN7009-XAM, CJN6008-XDM (4).webp",
+            "L-Đỏ": "./uploads/1744197499a-thun-tre-va-nu-yody-ATN7024-DDO (8).webp",
+            "L-Nâu": "./uploads/1744197556ao-thu-dong-nu-tre-vai-yody-ATN7020-NAU, CJN6008-XDM (4).webp",
+            "XL-Đen": "./uploads/1744196061ao-phong-nam-sieu-mong-yody-MATS25S036-SK002 (2).webp",
+            "XL-Trắng": "./uploads/1744196377ao-thun-nam-yody-TSM7188-TRA (1).webp",
+            "XL-Xanh Rêu": "./uploads/1744196265ao-phong-tay-raglan-yody-MATS25S028-SB009.webp",
+            "XL-Ghi": "./uploads/1744196195ao-thun-nam-yody-TSM7131-GH1 (2).webp",
+            "XL-Xám": "./uploads/1744196966ao-thun-thu-dong-giu-nhiet-nu-yody-ATN7009-XAM, CJN6008-XDM (4).webp",
+            "XL-Đỏ": "./uploads/1744197499a-thun-tre-va-nu-yody-ATN7024-DDO (8).webp",
+            "XL-Nâu": "./uploads/1744197556ao-thu-dong-nu-tre-vai-yody-ATN7020-NAU, CJN6008-XDM (4).webp",
+        };
+
+        // Hàm thay đổi ảnh chính khi click vào ảnh thumbnail
+        function changeMainImage(imageSrc) {
+            const mainImage = document.getElementById('main-image');
+            mainImage.src = imageSrc;
+        }
+
+        // Hàm cập nhật ảnh chính dựa trên size và màu sắc
+        function updateProductImage() {
+            const size = document.getElementById('size').value;
+            const color = document.getElementById('color').value;
+            const key = `${size}-${color}`; // Tạo key để tìm ảnh, ví dụ: "M-Đen"
+            const mainImage = document.getElementById('main-image');
+
+            // Nếu tìm thấy ảnh tương ứng với biến thể, cập nhật ảnh chính
+            if (variantImages[key]) {
+                mainImage.src = variantImages[key];
+            } else {
+                // Nếu không tìm thấy ảnh, đặt ảnh mặc định
+                mainImage.src = "<?= $chiTietSanPham['img']; ?>"; // Ảnh mặc định từ sản phẩm
+            }
+        }
+
+        // Gọi hàm updateProductImage khi trang tải lần đầu để hiển thị ảnh đúng với biến thể mặc định
+        document.addEventListener('DOMContentLoaded', function() {
+            updateProductImage();
+        });
+    </script>
 </body>
-
-<!-- Mirrored from caketheme.com/html/mojuri/shop-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 17 Nov 2024 11:03:01 GMT -->
-
 </html>
-<script>
-    function changeMainImage(imageSrc) {
-        const mainImage = document.getElementById('main-image');
-        mainImage.src = imageSrc;
-    }
-</script>

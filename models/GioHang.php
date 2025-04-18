@@ -45,6 +45,7 @@ class GioHang
     }
     public function addGioHang($id)
     {
+        
         try {
             $sql = 'INSERT INTO gio_hangs (tai_khoan_id) VALUES (:id)';
 
@@ -56,45 +57,42 @@ class GioHang
         } catch (Exception $e) {
             echo "Lỗi" . $e->getMessage();
         }
+
     }
     public function updateSoLuong($gio_hang_id, $san_pham_id, $so_luong)
     {
         try {
-            // Lấy số lượng tồn kho của sản phẩm
-            $soLuongConLai = $this->getSoLuongSanPham($san_pham_id);
-            
-            // Kiểm tra xem số lượng mới có vượt quá tồn kho không
-            if ($so_luong > $soLuongConLai) {
-                return false; // Trả về false nếu không đủ số lượng
-            }
-    
             $sql = 'UPDATE chi_tiet_gio_hangs 
                     SET so_luong = :so_luong 
                     WHERE gio_hang_id = :gio_hang_id 
                     AND san_pham_id = :san_pham_id';
     
             $stmt = $this->conn->prepare($sql);
-            $stmt->execute([':gio_hang_id' => $gio_hang_id, ':san_pham_id' => $san_pham_id, ':so_luong' => $so_luong]);
+            $stmt->execute([
+                ':gio_hang_id' => $gio_hang_id,
+                ':san_pham_id' => $san_pham_id,
+                ':so_luong' => $so_luong
+            ]);
     
             return true;
         } catch (Exception $e) {
             echo "Lỗi: " . $e->getMessage();
-            return false; // Trả về false nếu có lỗi xảy ra
+            return false;
         }
     }
-    public function addDetailGioHang($gio_hang_id, $san_pham_id, $so_luong)
+
+    public function addDetailGioHang($gio_hang_id, $san_pham_id, $so_luong,$size, $color)
+
     {
         try {
-            var_dump($gio_hang_id, $san_pham_id, $so_luong);
-            $sql = 'INSERT INTO chi_tiet_gio_hangs (gio_hang_id, san_pham_id, so_luong) VALUES (:gio_hang_id, :san_pham_id, :so_luong)';
-
+            $sql = "INSERT INTO chi_tiet_gio_hangs (gio_hang_id, san_pham_id, so_luong, size, color) 
+                    VALUES (?, ?, ?, ?, ?)";
             $stmt = $this->conn->prepare($sql);
-
-            $stmt->execute([':gio_hang_id' => $gio_hang_id, ':san_pham_id' => $san_pham_id, ':so_luong' => $so_luong]);
-
-            return true;
-        } catch (Exception $e) {
-            echo "Lỗi" . $e->getMessage();
+            $stmt->execute([$gio_hang_id, $san_pham_id, $so_luong, $size, $color]);
+            return true; // Trả về true nếu thành công
+        } catch (PDOException $e) {
+            echo "Lỗi khi thêm chi tiết giỏ hàng: " . $e->getMessage();
+            return false;
         }
     }
     public function getSoLuongSanPham($san_pham_id)

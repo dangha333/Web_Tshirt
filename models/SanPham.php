@@ -13,20 +13,21 @@ class SanPham
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([':san_pham_id' => $san_pham_id]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-        return $result ? $result['so_luong_ton'] : 0; // Trả về số lượng tồn kho, mặc định là 0 nếu không tìm thấy
+    
+        return $result ? $result['so_luong'] : 0; // ✅ Sửa ở đây
     }
+    
     public function getSanPhamById($id)
-    {
-        try {
-            $sql = 'SELECT * FROM san_phams WHERE id = :san_pham_id';
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute([':id' => $id]);
-            return $stmt->fetch(); // Trả về sản phẩm nếu tồn tại
-        } catch (Exception $e) {
-            echo "Lỗi: " . $e->getMessage();
-        }
+{
+    try {
+        $sql = 'SELECT * FROM san_phams WHERE id = :san_pham_id';
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([':san_pham_id' => $id]); // ✅ Đúng placeholder
+        return $stmt->fetch(); // Trả về sản phẩm nếu tồn tại
+    } catch (Exception $e) {
+        echo "Lỗi: " . $e->getMessage();
     }
+}
 
 
     public function getAllSanPham()
@@ -234,4 +235,5 @@ public function getProductQuantity($sanPhamId)
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     return $result ? $result['so_luong'] : 0; // trả về số lượng, hoặc 0 nếu không tìm thấy
 }
+
 }

@@ -105,6 +105,7 @@
                                     <a href="?act=form-them-banner" class="nav-link" data-key="t-nestable-list">Thêm
                                         mới</a>
                                 </li>
+                                
                             </ul>
                         </div>
                     </li>
@@ -215,6 +216,9 @@
                                     <a href="?act=form-them-san-pham" class="nav-link" data-key="t-nestable-list">Thêm
                                         mới</a>
                                 </li>
+                                <li class="nav-item">
+                <a href="?act=chi-tiet-san-pham" class="nav-link">Chi tiết sản phẩm</a>
+            </li>
                             </ul>
                         </div>
                     </li>

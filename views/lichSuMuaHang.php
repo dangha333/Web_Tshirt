@@ -14,10 +14,34 @@
     <div class="card-header align-items-center d-flex justify-content-between">
       <!-- Search Form -->
       <form class="search-form d-flex me-3" action="index.php?act=tim-kiem-don-hang" method="POST" role="search">
-        <input type="search" class="form-control" placeholder="Tìm mã đơn hàng..." aria-label="Search" name="search" />
-        <input class="btn btn-outline-primary" type="submit" value="Tìm kiếm" />
-      </form>
+  <input type="search" class="form-control" placeholder="Tìm mã đơn hàng..." name="search"
+    value="<?= isset($_POST['search']) ? htmlspecialchars($_POST['search']) : '' ?>" />
+
+  <select name="status" class="form-control mx-2">
+    <option value="">Tất cả trạng thái</option>
+    <?php foreach ($trangThaiDonHang as $id => $tt): ?>
+      <option value="<?= $id ?>" <?= isset($_POST['status']) && $_POST['status'] == $id ? 'selected' : '' ?>>
+        <?= htmlspecialchars($tt) ?>
+      </option>
+    <?php endforeach; ?>
+  </select>
+
+  <input class="btn btn-outline-primary" type="submit" value="Tìm kiếm" />
+</form>
+
     </div><!-- end card header -->
+    <?php if (!empty($_SESSION['message'])): ?>
+  <div id="flash-message" class="alert alert-warning alert-dismissible fade show" role="alert">
+    <?= $_SESSION['message'] ?>
+  </div>
+  <script>
+    // Tự động reload sau 2 giây để cập nhật nút Hủy
+    setTimeout(() => {
+      location.reload();
+    }, 2000);
+  </script>
+  <?php unset($_SESSION['message']); ?>
+<?php endif; ?>
 
     <div class="card-body">
       <div class="live-preview">
@@ -46,31 +70,35 @@
                     <td><?= $trangThaiDonHang[$donHangItem['trang_thai_don_hang_id']] ?></td>
 
                     <td>
-                      <a href="?act=chitietdonhang&id=<?= $donHangItem['id'] ?>" class="p-2">
-                        <i class="bi bi-eye"></i>
-                      </a>
+  <a href="?act=chitietdonhang&id=<?= $donHangItem['id'] ?>" class="p-2">
+    <i class="bi bi-eye"></i>
+  </a>
 
+  <?php if ($donHangItem['trang_thai_don_hang_id'] == 1): ?>
+    <!-- Đơn hàng Chờ xác nhận => Cho phép Hủy -->
+    <a href="?act=huy-don-hang&id_don_hang=<?= $donHangItem['id'] ?>"
+      onclick="return confirm('Xác định hủy đơn hàng?')">
+      <i class="bi bi-x-circle-fill"></i> Hủy
+    </a>
+  <?php endif; ?>
 
-                      <?php if ($donHangItem['trang_thai_don_hang_id'] == 7) { ?>
-                        <a href="?act=xoa-don-hang&id_don_hang=<?= $donHangItem['id'] ?>"
-                          onclick="return confirm('Xác định xóa đơn hàng?')">
-                          <i class="bi bi-trash-fill"></i> Xóa
-                        </a>
-                      <?php } ?>
-                      <?php if ($donHangItem['trang_thai_don_hang_id'] != 7 && $donHangItem['trang_thai_don_hang_id'] != 5) { ?>
-                        <a href="?act=huy-don-hang&id_don_hang=<?= $donHangItem['id'] ?>"
-                          onclick="return confirm('Xác định hủy đơn hàng?')">
-                          <i class="bi bi-trash-fill"></i> Hủy
-                        </a>
-                      <?php } ?>
-                      <?php if ($donHangItem['trang_thai_don_hang_id'] == 4) { ?>
-                        <a href="?act=xac-nhan-don-hang&id_don_hang=<?= $donHangItem['id'] ?>"
-                          onclick="return confirm('Xác nhận đơn hàng?')">
-                          <i class="bi bi-check"></i> Xác nhận
-                        </a>
-                      <?php } ?>
+  <?php if ($donHangItem['trang_thai_don_hang_id'] == 7): ?>
+    <!-- Đơn hàng Đã hủy => Cho phép Xóa -->
+    <a href="?act=xoa-don-hang&id_don_hang=<?= $donHangItem['id'] ?>"
+      onclick="return confirm('Xác định xóa đơn hàng?')">
+      <i class="bi bi-trash-fill"></i> Xóa
+    </a>
+  <?php endif; ?>
 
-                    </td>
+  <?php if ($donHangItem['trang_thai_don_hang_id'] == 4): ?>
+    <!-- Đơn hàng Đã giao => Cho phép người dùng xác nhận hoàn thành -->
+    <a href="?act=xac-nhan-don-hang&id_don_hang=<?= $donHangItem['id'] ?>"
+      onclick="return confirm('Xác nhận đơn hàng?')">
+      <i class="bi bi-check-circle-fill"></i> Xác nhận
+    </a>
+  <?php endif; ?>
+</td>
+
                   </tr>
                 <?php endforeach; ?>
               <?php else: ?>
