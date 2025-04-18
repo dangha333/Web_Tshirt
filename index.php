@@ -31,7 +31,7 @@ require_once './models/DonHang.php';
 
 // error_reporting(E_ERROR | E_PARSE);
 
-
+checkAccess(); // dùng chung
 
 // Route
 $act = $_GET['act'] ?? '/';

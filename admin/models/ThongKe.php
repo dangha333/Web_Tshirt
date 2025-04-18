@@ -18,7 +18,7 @@ class ThongKe
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
+
             return ['revenue' => 0]; // Return a default value
         }
     }
@@ -32,7 +32,7 @@ class ThongKe
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
+
             return ['completed_orders' => 0]; // Default value
         }
     }
@@ -46,7 +46,7 @@ class ThongKe
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
+     
             return ['total_users' => 0]; // Default value
         }
     }
@@ -60,7 +60,7 @@ class ThongKe
             $stmt->execute();
             return $stmt->fetch(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
+
             return ['profit' => 0]; // Default value
         }
     }
@@ -74,7 +74,7 @@ class ThongKe
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
+       
             return []; // Return empty array on error
         }
     }
@@ -88,7 +88,7 @@ class ThongKe
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
+          
             return []; // Return empty array on error
         }
     }

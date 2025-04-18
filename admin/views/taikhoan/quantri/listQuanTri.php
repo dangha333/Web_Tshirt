@@ -80,33 +80,31 @@
                                                             <th scope="col">STT</th>
                                                             <th scope="col">Họ tên</th>
                                                             <th scope="col">Email</th>
+                                                            <th scope="col">Chức vụ</th>
                                                             <th scope="col">Số điện thoại</th>
                                                             <th scope="col">Trạng thái</th>
-                                                            <th scope="col">Thao Tác</th>
+                                           
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <?php foreach ($listQuanTri as $key => $quanTri): ?>
-                                                            <tr>
-                                                                <td class="fw-medium"><?= $key + 1 ?></td>
-                                                                <td><?= $quanTri['ho_ten'] ?></td>
-                                                                <td><?= $quanTri['email'] ?></td>
-                                                                <td><?= $quanTri['so_dien_thoai'] ?></td>
-                                                                <td><?= $quanTri['trang_thai'] ==1? 'Active ':'Inactive' ?></td>
-                                                                <td>
-                                                                <a href="<?= '?act=form-sua-quan-tri&id_quan_tri=' .$quanTri['id'] ?>">
-                                                                    <button class="btn-btn-danger">Sửa</button>
-                                                                </a>
+                                                    <?php foreach ($listQuanTri as $key => $quanTri): ?>
+    <tr>
+        <td class="fw-medium"><?= $key + 1 ?></td>
+        <td><?= $quanTri['ho_ten'] ?></td>
+        <td><?= $quanTri['email'] ?></td>
+        <td>
+        <select class="form-select chuc-vu-select" data-id="<?= $quanTri['id'] ?>">
+    <option value="1" <?= $quanTri['chuc_vu_id'] == 1 ? 'selected' : '' ?>>Admin</option>
+    <option value="2" <?= $quanTri['chuc_vu_id'] == 2 ? 'selected' : '' ?>>User</option>
+</select>
 
-                                                                <a href="<?= '?act=reset-password&id_quan_tri=' .$quanTri['id'] ?>"
-                                                                onclick="return confirm('Bạn muốn reset pass không?')">
-                                                                
-                                                                    <button class="btn-btn-danger">Reset</button>
-                                                                </a>
-                                                                </td>
-                                                                
-                                                            </tr>
-                                                        <?php endforeach; ?>
+        </td>
+        <td><?= $quanTri['so_dien_thoai'] ?></td>
+        <td><?= $quanTri['trang_thai'] == 1 ? 'Active' : 'Inactive' ?></td>
+        <td></td>
+    </tr>
+<?php endforeach; ?>
+
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -169,11 +167,45 @@
             <i class='mdi mdi-spin mdi-cog-outline fs-22'></i>
         </div>
     </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- JAVASCRIPT -->
+    <script>
+    $(document).on('change', '.chuc-vu-select', function () {
+        var id = $(this).data('id');
+        var chucVuId = $(this).val();
+
+        $.ajax({
+            url: '?act=update-chuc-vu-ajax',
+            method: 'POST',
+            data: {
+                id: id,
+                chuc_vu_id: chucVuId
+            },
+            success: function (res) {
+                var data = JSON.parse(res);
+                if (data.success) {
+                    alert('Cập nhật chức vụ thành công!');
+                } else {
+                    alert('Cập nhật thất bại!');
+                }
+            },
+            error: function () {
+                alert('Lỗi kết nối server!');
+            }
+        });
+    });
+   
+</script>
+
+
+
+
     <?php
     require_once "views/layouts/libs_js.php";
     ?>
+
 
 </body>
 

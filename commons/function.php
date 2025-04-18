@@ -66,3 +66,53 @@ function checkLoginAdmin()
     }
 
 }
+function checkAccess()
+{
+    $act = $_REQUEST['act'] ?? '';
+    $isAdminRoute = strpos($_SERVER['PHP_SELF'], '/admin/') !== false;
+
+    // ✅ ƯU TIÊN: Nếu đã login với quyền admin → chuyển sang dashboard
+    if (isset($_SESSION['user_admin']) && $_SESSION['user_admin']['chuc_vu_id'] == 1) {
+        if (in_array($act, ['login', 'login-admin', 'check-login', 'check-login-admin'])) {
+            header("Location: /web_Tshirt/admin/?act=dashboard");
+            exit();
+        }
+    }
+
+    // ==== ADMIN ROUTE ====
+    if ($isAdminRoute) {
+        $publicAdminActs = ['login-admin', 'check-login-admin', 'logout-admin'];
+        if (!in_array($act, $publicAdminActs)) {
+            if (!isset($_SESSION['user_admin'])) {
+                header("Location: ?act=login-admin");
+                exit();
+            }
+
+            if ($_SESSION['user_admin']['chuc_vu_id'] != 1) {
+                header("Location: /web_Tshirt/?act=home");
+                exit();
+            }
+        }
+    }
+
+    // ==== CLIENT ROUTE ====
+    else {
+        $publicClientActs = ['login', 'check-login', 'logout', 'dang-ky', 'check-dang-ky'];
+        if (!in_array($act, $publicClientActs)) {
+            if (!isset($_SESSION['user'])) {
+                header("Location: ?act=login");
+                exit();
+            }
+
+            // Nếu là admin nhưng chưa login client → redirect về admin
+            if (isset($_SESSION['user_admin']) && !isset($_SESSION['user'])) {
+                header("Location: /web_Tshirt/admin/?act=login-admin");
+                exit();
+            }
+        }
+    }
+}
+
+
+
+

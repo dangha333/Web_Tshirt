@@ -27,7 +27,7 @@ class HomeController
                     if ($user['chuc_vu_id'] == 1) {
                         header("Location: ?act=dashboard");
                     } else {
-                        header("Location: ?act=home");
+                        header("Location: /web_Tshirt/?act=home");
                     }
                     exit();
                 }

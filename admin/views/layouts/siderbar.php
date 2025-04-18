@@ -32,7 +32,7 @@
         <!-- LOGO -->
 
         <div class="navbar-brand-box">
-            <a href="?act=dashboard" class="logo logo-dark">
+            <a href="?act=thong-ke" class="logo logo-dark">
                 <span class="logo-sm">
                     <img src="assets/images/logo-sm.png" alt="" height="22">
                 </span>
@@ -40,7 +40,7 @@
                     <img src="assets/images/logo-dark.png" alt="" height="17">
                 </span>
             </a>
-            <a href="?act=dashboard" class="logo logo-light">
+            <a href="?act=thong-ke" class="logo logo-light">
                 <span class="logo-sm">
                     <img src="assets/images/logo-sm.png" alt="" height="22">
                 </span>
@@ -149,10 +149,7 @@
 
 
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="#sidebarNguoiDung" data-bs-toggle="collapse" role="button"
-                            aria-expanded="false" aria-controls="sidebarNguoiDung">
-                            <i class="ri-user-line"></i> <span data-key="t-dashboards">Người dùng</span>
-                        </a>
+                      
                         <div class="collapse menu-dropdown" id="sidebarNguoiDung">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
@@ -256,8 +253,6 @@
                             </ul>
                         </div>
                     </li>
-
-                    <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Bán hàng</span></li>
                     <!-- <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-user"></i>
@@ -295,12 +290,7 @@
                                 <li class="nav-item">
                                     <a href="?act=list-tai-khoan-quan-tri" class="nav-link" data-key="t-sweet-alerts">Tài khoản quản trị</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="?act=" class="nav-link" data-key="t-nestable-list">Tài khoản khách hàng</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="?act=form-sua-thong-tin-ca-nhan" class="nav-link" data-key="t-nestable-list">Quản lý tài khoản cá nhân</a>
-                                </li>
+                             
                             </ul>
                         </div>
                     </li>

@@ -9,6 +9,17 @@ class TaiKhoan
         $this->conn = connectDB();
     }
 
+    public function updateChucVu($id, $chucVuId)
+    {
+        $sql = "UPDATE tai_khoans SET chuc_vu_id = :chuc_vu_id WHERE id = :id";
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute([
+            ':chuc_vu_id' => $chucVuId,
+            ':id' => $id
+        ]);
+    }
+    
+
     //Danh sach tin tuc
     public function getAllTaiKhoan()
     {

@@ -19,6 +19,25 @@ class TaiKhoanController
 
         // deleteSessionError();
     }
+    // Trong TaiKhoanController.php
+public function updateChucVuAjax()
+{
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $id = $_POST['id'] ?? null;
+        $chucVuId = $_POST['chuc_vu_id'] ?? null;
+
+        if ($id && $chucVuId) {
+            $success = $this->modelTaiKhoan->updateChucVu($id, $chucVuId);
+            echo json_encode(['success' => $success]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Thiếu dữ liệu']);
+        }
+
+        exit();
+    }
+}
+
+    
     public function postAddQuanTri()
     {
 
@@ -58,10 +77,12 @@ class TaiKhoanController
     }
     public function formLogin()
     {
-        require_once './views/auth/formLogin.php';
+        require_once './views/auth/formLoginn.php';
     }
     public function login()
     {
+       
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $email = $_POST['email'];
             $password = $_POST['password'];

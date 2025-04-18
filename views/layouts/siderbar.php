@@ -149,10 +149,6 @@
 
 
                     <li class="nav-item">
-                        <a class="nav-link menu-link" href="#sidebarNguoiDung" data-bs-toggle="collapse" role="button"
-                            aria-expanded="false" aria-controls="sidebarNguoiDung">
-                            <i class="ri-user-line"></i> <span data-key="t-dashboards">Người dùng</span>
-                        </a>
                         <div class="collapse menu-dropdown" id="sidebarNguoiDung">
                             <ul class="nav nav-sm flex-column">
                                 <li class="nav-item">
@@ -257,7 +253,7 @@
                         </div>
                     </li>
 
-                    <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Bán hàng</span></li>
+                   
                     <!-- <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-user"></i>

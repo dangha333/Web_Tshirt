@@ -3,7 +3,8 @@ session_start();
 // Require file Common
 require_once '../commons/env.php'; // Khai báo biến môi trường
 require_once '../commons/function.php'; // Hàm hỗ trợ
-checkLoginAdmin();
+
+
 // Require toàn bộ file Controllers
 require_once 'controllers/DashboardController.php';
 require_once 'controllers/DanhMucController.php';
@@ -149,9 +150,7 @@ match ($act) {
     'form-them-quan-tri' => (new TaiKhoanController())->formAddQuanTri(),
     'them-quan-tri' => (new TaiKhoanController())->postAddQuanTri(),
     //
-    'login-admin' => (new TaiKhoanController())->formLogin(),
-    'check-login-admin' => (new TaiKhoanController())->login(),
-    'logout-admin' => (new TaiKhoanController())->logout(),
+
 
 
 
@@ -168,6 +167,8 @@ match ($act) {
     'form-sua-quan-tri' => (new TaiKhoanController())->formEditQuanTri(),
     'sua-quan-tri' => (new TaiKhoanController())->postEditQuanTri(),
     'reset-password' => (new TaiKhoanController())->resetPassword(),
+    'update-chuc-vu-ajax' => (new TaiKhoanController())->updateChucVuAjax(),
+
 
 
 
@@ -183,6 +184,9 @@ match ($act) {
 
 
     //
+    'login-admin' => (new TaiKhoanController())->formLogin(),
+    'check-login-admin' => (new TaiKhoanController())->login(),
+    'logout-admin' => (new TaiKhoanController())->logout(),
     'login' => (new HomeController())->formLogin(),
     'check-login' => (new HomeController())->postlogin(),
     //
